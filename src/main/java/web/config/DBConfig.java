@@ -28,8 +28,13 @@ import java.util.Properties;
 @ComponentScan("web")
 public class DBConfig {
 
+
+    private final Environment env;
+
     @Autowired
-    private Environment env;
+    public DBConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource getDataSource() {
@@ -40,28 +45,6 @@ public class DBConfig {
         dataSource.setPassword(env.getProperty("db.password"));
         return dataSource;
     }
-
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean getLocalContainerEntity() {
-//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-//        em.setDataSource(getDataSource());
-//        em.setPackagesToScan(env.getRequiredProperty("db.entity.package"));
-//        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-//        Properties props = new Properties();
-//        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-//        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-//        props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-//        em.setJpaProperties(props);
-//        return em;
-//    }
-
-//    @Bean
-//    public PlatformTransactionManager getplatform() {
-//        JpaTransactionManager tm = new JpaTransactionManager();
-//        tm.setEntityManagerFactory(getLocalContainerEntity().getObject());
-//        return tm;
-//    }
-
 
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {

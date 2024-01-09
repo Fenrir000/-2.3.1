@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 @Transactional
 public class UserDAOImpl implements UserDAO {
@@ -18,6 +19,7 @@ public class UserDAOImpl implements UserDAO {
     public void save(User user) {
         entityManager.persist(user);
     }
+
     @Override
     public Optional<User> findById(Long id) {
         User user = entityManager.find(User.class, id);
@@ -29,7 +31,6 @@ public class UserDAOImpl implements UserDAO {
         return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
     }
-
 
 
     @Override
