@@ -31,7 +31,7 @@ public class DBConfig {
 
     private final Environment env;
 
-    @Autowired
+
     public DBConfig(Environment env) {
         this.env = env;
     }
